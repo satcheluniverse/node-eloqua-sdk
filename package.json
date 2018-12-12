@@ -1,0 +1,62 @@
+{
+  "name": "@jeffbaldwinjr/eloqua-sdk",
+  "version": "0.8.0",
+  "description": "SDK to interact with Oracle Eloqua API",
+  "main": "./lib/eloqua.js",
+  "private": true,
+  "scripts": {
+    "docs-build": "rm -rf docs && esdoc -c esdoc.json",
+    "release": "release-it",
+    "lint": "eslint ./",
+    "mocha": "nyc mocha",
+    "test": "npm run lint && npm run mocha",
+    "test-report-html": "nyc report --reporter=html",
+    "test-report-coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "test-local": "npm test && npm run test-report-html",
+    "test-travis-ci": "npm test && npm run docs-build && npm run test-report-html && npm run test-report-coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffbaldwinjr/node-eloqua-sdk.git"
+  },
+  "keywords": [
+    "eloqua",
+    "oracle",
+    "api",
+    "bulk",
+    "rest"
+  ],
+  "files": [
+    "lib",
+    "LICENSE.md",
+    "README.md",
+    "CONTRIBUTING.md"
+  ],
+  "author": "Jeff Baldwin <jeffbaldwinjr@gmail.com>",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/jeffbaldwinjr/node-eloqua-sdk/issues"
+  },
+  "homepage": "https://github.com/jeffbaldwinjr/node-eloqua-sdk#readme",
+  "engine": {
+    "node": ">=7.6"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.2",
+    "esdoc": "^1.1.0",
+    "esdoc-external-nodejs-plugin": "^1.0.0",
+    "esdoc-standard-plugin": "^1.0.0",
+    "eslint": "^5.9.0",
+    "eslint-plugin-mocha": "^5.2.0",
+    "mocha": "^5.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
+    "moxios": "^0.4.0",
+    "nyc": "^13.1.0",
+    "release-it": "^8.3.0",
+    "sinon": "^7.1.1"
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}

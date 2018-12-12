@@ -1,0 +1,30 @@
+{
+  "source": "./lib",
+  "destination": "./docs",
+  "excludes": [
+    "node_modules"
+  ],
+  "plugins": [
+    {
+      "name": "esdoc-standard-plugin",
+      "option": {
+        "unexportedIdentifier": {
+          "enable": true
+        },
+        "brand": {
+          "site": "https://jeffbaldwinjr.github.io/node-eloqua-sdk/",
+          "author": "https://github.com/JeffBaldwinJr"
+        },
+        "test": {
+          "source": "./test/"
+        }
+      }
+    },
+    {
+      "name": "esdoc-external-nodejs-plugin",
+      "option": {
+        "enable": true
+      }
+    }
+  ]
+}
