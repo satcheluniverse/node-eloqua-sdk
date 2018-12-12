@@ -1,8 +1,6 @@
 {
   "verbose": true,
-  "requireCleanWorkingDir": false,
-  "requireUpstream": false,
-  "src": {
+  "git": {
     "commit": true,
     "commitMessage": "Release ${version}",
     "commitArgs": "",
@@ -13,16 +11,29 @@
     "push": true,
     "pushArgs": "",
     "pushRepo": "origin",
-    "beforeStartCommand": false,
-    "afterReleaseCommand": false,
-    "addUntrackedFiles": true
+    "requireUpstream": false,
+    "requireCleanWorkingDir": false
+  },
+  "github": {
+    "release": true
   },
   "npm": {
-    "publish": false,
-    "private": true
+    "publish": true
   },
   "dist": {
     "repo": "https://github.com/jeffbaldwinjr/node-eloqua-sdk.git#gh-pages",
-    "beforeStageCommand": "cat front.yml ../README.md > index.md"
+    "scripts": {
+      "beforeStage": "cp -a ../docs/. ./ && cp -a ../coverage/. ./coverage/"
+    },
+    "git": {
+      "addUntrackedFiles": true,
+      "commit": true,
+      "tag": true,
+      "push": true
+    }
+  },
+  "scripts": {
+    "beforeStart": "npm install && npm run docs-build && npm run test && npm run test-report-html",
+    "afterRelease": "rm -rf docs && rm -rf coverage && rm -rf .nyc_output"
   }
 }

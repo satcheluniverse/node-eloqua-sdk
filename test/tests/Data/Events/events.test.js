@@ -1,62 +1,69 @@
-let common = require('../../common');
 let EloquaApi = common.EloquaApi;
 let getOptions = common.getOptions;
 let moxios = require('moxios');
 let sinon = require('sinon');
 
-describe('Email Tests', () => {
-  it('Email Get', done => {
+/** @test {Events} */
+describe('Event Tests', () => {
+
+  /** @test {Events#get} */
+  it('Event Get', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.assets.emails.get({count: 1}).then((email) => {
-        expect(email).to.be.an('Object');
+      eloqua.data.events.get({count: 1}).then((event) => {
+        expect(event).to.be.an('Object');
       });
     }).then(done);
   });
 
-  it('Email Get with invalid credentials', done => {
+  /** @test {Events#get} */
+  it('Event Get with invalid credentials', done => {
     let eloqua = new EloquaApi(getOptions({baseURL: null, password: null}));
     eloqua.init().then(() => {
-      eloqua.assets.emails.get().then((email) => {
-        expect(email).to.eql('401: Unauthorized');
+      eloqua.data.events.get().then((event) => {
+        expect(event).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Email Get One', done => {
+  /** @test {Events#getOne} */
+  it('Event Get One', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.assets.emails.get({count: 1}).then((emails) => {
-        expect(emails).to.be.an('Object');
-        eloqua.assets.emails.getOne(emails.elements[0].id).then((email) => {
-          expect(email).to.be.an('Object');
+      eloqua.data.events.get({count: 1}).then((events) => {
+        expect(events).to.be.an('Object');
+        eloqua.data.events.getOne(events.elements[0].id).then((event) => {
+          expect(event).to.be.an('Object');
         });
       });
     }).then(done);
   });
 
-  it('Email Get One with Querystring', done => {
+  /** @test {Events#getOne} */
+  it('Event Get One with Querystring', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.assets.emails.get({count: 1}).then((emails) => {
-        expect(emails).to.be.an('Object');
-        eloqua.assets.emails.getOne(emails.elements[0].id, {depth: 'minimal'}).then((email) => {
-          expect(email).to.be.an('Object');
+      eloqua.data.events.get({count: 1}).then((events) => {
+        expect(events).to.be.an('Object');
+        eloqua.data.events.getOne(events.elements[0].id, {depth: 'minimal'}).then((event) => {
+          expect(event).to.be.an('Object');
         });
       });
     }).then(done);
   });
 
-  it('Email Get One with invalid Id', done => {
+  /** @test {Events#getOne} */
+  it('Event Get One with invalid Id', done => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.assets.emails.getOne(1).then((email) => {
-        expect(email).to.eql('401: Unauthorized');
+      eloqua.data.events.getOne(1).then((event) => {
+        expect(event).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Email Create', (done) => {
+  /** @test {Events#create} */
+  it('Event Create', (done) => {
     let data = {
       name: 'Test'
     };
@@ -67,7 +74,7 @@ describe('Email Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.assets.emails.create(data).then(onFulfilled);
+        eloqua.data.events.create(data).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -81,19 +88,21 @@ describe('Email Tests', () => {
     });
   });
 
-  it('Email Create with Error', (done) => {
+  /** @test {Events#create} */
+  it('Event Create with Error', (done) => {
     let data = {
       name: 'Test'
     };
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.assets.emails.create(data).then((email) => {
-        expect(email).to.eql('401: Unauthorized');
+      eloqua.data.events.create(data).then((event) => {
+        expect(event).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Email Update', (done) => {
+  /** @test {Events#update} */
+  it('Event Update', (done) => {
     let data = {
       name: 'Test'
     };
@@ -104,7 +113,7 @@ describe('Email Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.assets.emails.update(1, data).then(onFulfilled);
+        eloqua.data.events.update(1, data).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -118,19 +127,21 @@ describe('Email Tests', () => {
     });
   });
 
-  it('Email Update with Error', (done) => {
+  /** @test {Events#update} */
+  it('Event Update with Error', (done) => {
     let data = {
       name: 'Test'
     };
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.assets.emails.update(1, data).then((email) => {
-        expect(email).to.eql('401: Unauthorized');
+      eloqua.data.events.update(1, data).then((event) => {
+        expect(event).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Email Delete', (done) => {
+  /** @test {Events#delete} */
+  it('Event Delete', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
 
@@ -138,7 +149,7 @@ describe('Email Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.assets.emails.delete(1).then(onFulfilled);
+        eloqua.data.events.delete(1).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -152,12 +163,15 @@ describe('Email Tests', () => {
     });
   });
 
-  it('Email Delete with Error', (done) => {
+  /** @test {Events#delete} */
+  it('Event Delete with Error', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.assets.emails.delete(1).then((email) => {
-        expect(email).to.eql('401: Unauthorized');
+      eloqua.data.events.delete(1).then((event) => {
+        expect(event).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
+
+  require('./eventRegistrants.test');
 });

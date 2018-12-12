@@ -1,3 +1,4 @@
+/** @ignore */
 describe('Appcloud Tests', () => {
 
 });

@@ -4,9 +4,13 @@
   },
   "globals": {
     "assert": true,
-    "expect": true
+    "expect": true,
+    "common": true,
+    "describe": true
   },
   "rules": {
-    "no-unused-expressions": 0
+    "no-unused-expressions": 0,
+    "camelcase": [1, {"allow": ["C_EmailAddress","access_token","grant_type","token_type",
+      "refresh_token","client_id","client_secret"]}]
   }
 }

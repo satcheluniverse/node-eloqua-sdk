@@ -1,19 +1,13 @@
 {
-  "name": "@jeffbaldwinjr/eloqua-sdk",
-  "version": "0.8.0",
+  "name": "eloqua-sdk",
+  "version": "0.9.1-rc.2",
   "description": "SDK to interact with Oracle Eloqua API",
   "main": "./lib/eloqua.js",
-  "private": true,
   "scripts": {
     "docs-build": "rm -rf docs && esdoc -c esdoc.json",
-    "release": "release-it",
-    "lint": "eslint ./",
-    "mocha": "nyc mocha",
-    "test": "npm run lint && npm run mocha",
-    "test-report-html": "nyc report --reporter=html",
-    "test-report-coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "test-local": "npm test && npm run test-report-html",
-    "test-travis-ci": "npm test && npm run docs-build && npm run test-report-html && npm run test-report-coveralls"
+    "test": "eslint ./ && nyc mocha",
+    "test-report-html": "rm -rf coverage && nyc report --reporter=html",
+    "test-report-coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -27,7 +21,8 @@
     "rest"
   ],
   "files": [
-    "lib",
+    "lib/eloqua.js",
+    "lib/Extensions",
     "LICENSE.md",
     "README.md",
     "CONTRIBUTING.md"
@@ -53,7 +48,7 @@
     "mocha-lcov-reporter": "^1.3.0",
     "moxios": "^0.4.0",
     "nyc": "^13.1.0",
-    "release-it": "^8.3.0",
+    "release-it": "^9.1.0",
     "sinon": "^7.1.1"
   },
   "dependencies": {
