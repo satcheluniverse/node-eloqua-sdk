@@ -1,6 +1,6 @@
 {
   "name": "@jeffbaldwinjr/eloqua-sdk",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "SDK to interact with Oracle Eloqua API",
   "main": "./lib/eloqua.js",
   "private": true,

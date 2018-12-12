@@ -22,7 +22,6 @@
     "private": true
   },
   "dist": {
-    "repo": "https://github.com/jeffbaldwinjr/node-eloqua-sdk.git#gh-pages",
-    "beforeStageCommand": "cat front.yml ../README.md > index.md"
+    "repo": "https://github.com/jeffbaldwinjr/node-eloqua-sdk.git#gh-pages"
   }
 }

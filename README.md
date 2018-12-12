@@ -99,7 +99,6 @@ getCampaigns();
 ## Built With
 
 * [Axios](https://github.com/axios/axios)
-* [Babel](https://babeljs.io/)
 
 
 ## Contributing
