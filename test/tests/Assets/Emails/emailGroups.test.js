@@ -1,62 +1,69 @@
-let common = require('../../common');
 let EloquaApi = common.EloquaApi;
 let getOptions = common.getOptions;
 let moxios = require('moxios');
 let sinon = require('sinon');
 
-describe('External Asset Type Tests', () => {
-  it('External Asset Type Get', done => {
+/** @test {EmailGroups} */
+describe('Email Group Tests', () => {
+
+  /** @test {EmailGroups#get} */
+  it('Email Group Get', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.types.get({count: 1}).then((externalAssetType) => {
-        expect(externalAssetType).to.be.an('Object');
+      eloqua.assets.emails.groups.get({count: 1}).then((email) => {
+        expect(email).to.be.an('Object');
       });
     }).then(done);
   });
 
-  it('External Asset Type Get with invalid credentials', done => {
+  /** @test {EmailGroups#get} */
+  it('Email Group Get with invalid credentials', done => {
     let eloqua = new EloquaApi(getOptions({baseURL: null, password: null}));
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.types.get().then((externalAssetType) => {
-        expect(externalAssetType).to.eql('401: Unauthorized');
+      eloqua.assets.emails.groups.get().then((email) => {
+        expect(email).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('External Asset Type Get One', done => {
+  /** @test {EmailGroups#getOne} */
+  it('Email Group Get One', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.types.get({count: 1}).then((externalAssetTypes) => {
-        expect(externalAssetTypes).to.be.an('Object');
-        eloqua.assets.externalAssets.types.getOne(externalAssetTypes.elements[0].id).then((externalAssetType) => {
-          expect(externalAssetType).to.be.an('Object');
+      eloqua.assets.emails.groups.get({count: 1}).then((emails) => {
+        expect(emails).to.be.an('Object');
+        eloqua.assets.emails.groups.getOne(emails.elements[0].id).then((email) => {
+          expect(email).to.be.an('Object');
         });
       });
     }).then(done);
   });
 
-  it('External Asset Type Get One with Querystring', done => {
+  /** @test {EmailGroups#getOne} */
+  it('Email Group Get One with Querystring', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.types.get({count: 1}).then((externalAssetTypes) => {
-        expect(externalAssetTypes).to.be.an('Object');
-        eloqua.assets.externalAssets.types.getOne(externalAssetTypes.elements[0].id, {depth: 'minimal'}).then((externalAssetType) => {
-          expect(externalAssetType).to.be.an('Object');
+      eloqua.assets.emails.groups.get({count: 1}).then((emails) => {
+        expect(emails).to.be.an('Object');
+        eloqua.assets.emails.groups.getOne(emails.elements[0].id, {depth: 'minimal'}).then((email) => {
+          expect(email).to.be.an('Object');
         });
       });
     }).then(done);
   });
 
-  it('External Asset Type Get One with invalid Id', done => {
+  /** @test {EmailGroups#getOne} */
+  it('Email Group Get One with invalid Id', done => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.types.getOne(1).then((externalAssetType) => {
-        expect(externalAssetType).to.eql('401: Unauthorized');
+      eloqua.assets.emails.groups.getOne(1).then((email) => {
+        expect(email).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('External Asset Type Create', (done) => {
+  /** @test {EmailGroups#create} */
+  it('Email Group Create', (done) => {
     let data = {
       name: 'Test'
     };
@@ -67,7 +74,7 @@ describe('External Asset Type Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.assets.externalAssets.types.create(data).then(onFulfilled);
+        eloqua.assets.emails.groups.create(data).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -81,19 +88,21 @@ describe('External Asset Type Tests', () => {
     });
   });
 
-  it('External Asset Type Create with Error', (done) => {
+  /** @test {EmailGroups#create} */
+  it('Email Group Create with Error', (done) => {
     let data = {
       name: 'Test'
     };
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.types.create(data).then((externalAssetType) => {
-        expect(externalAssetType).to.eql('401: Unauthorized');
+      eloqua.assets.emails.groups.create(data).then((email) => {
+        expect(email).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('External Asset Type Update', (done) => {
+  /** @test {EmailGroups#update} */
+  it('Email Group Update', (done) => {
     let data = {
       name: 'Test'
     };
@@ -104,7 +113,7 @@ describe('External Asset Type Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.assets.externalAssets.types.update(1, data).then(onFulfilled);
+        eloqua.assets.emails.groups.update(1, data).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -118,19 +127,21 @@ describe('External Asset Type Tests', () => {
     });
   });
 
-  it('External Asset Type Update with Error', (done) => {
+  /** @test {EmailGroups#update} */
+  it('Email Group Update with Error', (done) => {
     let data = {
       name: 'Test'
     };
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.types.update(1, data).then((externalAssetType) => {
-        expect(externalAssetType).to.eql('401: Unauthorized');
+      eloqua.assets.emails.groups.update(1, data).then((email) => {
+        expect(email).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('External Asset Type Delete', (done) => {
+  /** @test {EmailGroups#delete} */
+  it('Email Group Delete', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
 
@@ -138,7 +149,7 @@ describe('External Asset Type Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.assets.externalAssets.types.delete(1).then(onFulfilled);
+        eloqua.assets.emails.groups.delete(1).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -152,11 +163,12 @@ describe('External Asset Type Tests', () => {
     });
   });
 
-  it('External Asset Type Delete with Error', (done) => {
+  /** @test {EmailGroups#delete} */
+  it('Email Group Delete with Error', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.types.delete(1).then((externalAssetType) => {
-        expect(externalAssetType).to.eql('401: Unauthorized');
+      eloqua.assets.emails.groups.delete(1).then((email) => {
+        expect(email).to.eql('401: Unauthorized');
       });
     }).then(done);
   });

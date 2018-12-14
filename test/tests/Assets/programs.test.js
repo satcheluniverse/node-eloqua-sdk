@@ -1,10 +1,12 @@
-let common = require('../../common');
 let EloquaApi = common.EloquaApi;
 let getOptions = common.getOptions;
 let moxios = require('moxios');
 let sinon = require('sinon');
 
+/** @test {Programs} */
 describe('Program Tests', () => {
+
+  /** @test {Programs#get} */
   it('Program Get', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
@@ -14,6 +16,7 @@ describe('Program Tests', () => {
     }).then(done);
   });
 
+  /** @test {Programs#get} */
   it('Program Get with invalid credentials', done => {
     let eloqua = new EloquaApi(getOptions({baseURL: null, password: null}));
     eloqua.init().then(() => {
@@ -23,6 +26,7 @@ describe('Program Tests', () => {
     }).then(done);
   });
 
+  /** @test {Programs#getOne} */
   it('Program Get One', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
@@ -35,6 +39,7 @@ describe('Program Tests', () => {
     }).then(done);
   });
 
+  /** @test {Programs#getOne} */
   it('Program Get One with Querystring', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
@@ -47,6 +52,7 @@ describe('Program Tests', () => {
     }).then(done);
   });
 
+  /** @test {Programs#getOne} */
   it('Program Get One with invalid Id', done => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
@@ -56,6 +62,7 @@ describe('Program Tests', () => {
     }).then(done);
   });
 
+  /** @test {Programs#create} */
   it('Program Create', (done) => {
     let data = {
       name: 'Test'
@@ -81,6 +88,7 @@ describe('Program Tests', () => {
     });
   });
 
+  /** @test {Programs#create} */
   it('Program Create with Error', (done) => {
     let data = {
       name: 'Test'
@@ -93,6 +101,7 @@ describe('Program Tests', () => {
     }).then(done);
   });
 
+  /** @test {Programs#update} */
   it('Program Update', (done) => {
     let data = {
       name: 'Test'
@@ -118,6 +127,7 @@ describe('Program Tests', () => {
     });
   });
 
+  /** @test {Programs#update} */
   it('Program Update with Error', (done) => {
     let data = {
       name: 'Test'
@@ -130,6 +140,7 @@ describe('Program Tests', () => {
     }).then(done);
   });
 
+  /** @test {Programs#delete} */
   it('Program Delete', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
@@ -152,6 +163,7 @@ describe('Program Tests', () => {
     });
   });
 
+  /** @test {Programs#delete} */
   it('Program Delete with Error', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
@@ -161,6 +173,7 @@ describe('Program Tests', () => {
     }).then(done);
   });
 
+  /** @test {Programs#activate} */
   it('Program Activate', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
@@ -183,6 +196,7 @@ describe('Program Tests', () => {
     });
   });
 
+  /** @test {Programs#activate} */
   it('Program Activate with Error and Querystring', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
@@ -192,6 +206,7 @@ describe('Program Tests', () => {
     }).then(done);
   });
 
+  /** @test {Programs#deactivate} */
   it('Program Deactivate', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
@@ -214,6 +229,7 @@ describe('Program Tests', () => {
     });
   });
 
+  /** @test {Programs#deactivate} */
   it('Program Deactivate with Error', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
@@ -223,6 +239,7 @@ describe('Program Tests', () => {
     }).then(done);
   });
 
+  /** @test {Programs#pause} */
   it('Program Pause', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
@@ -245,6 +262,7 @@ describe('Program Tests', () => {
     });
   });
 
+  /** @test {Programs#pause} */
   it('Program Pause with Error', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {

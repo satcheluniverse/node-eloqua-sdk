@@ -1,6 +1,8 @@
 let common = require('./common');
 
+/* GLOBALS expect */
 global.expect = common.expect;
+global.common = common;
 
 describe('Eloqua API Tests', function () {
   this.slow(5000);

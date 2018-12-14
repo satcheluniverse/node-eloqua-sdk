@@ -3,7 +3,10 @@ let EloquaApi = common.EloquaApi;
 let getOptions = common.getOptions;
 let globals = common.globals;
 
+/** @test {EloquaApi} */
 describe('Constructor Tests', () => {
+
+  /** @test {EloquaApi#init} */
   it('Constructor functions properly', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
@@ -18,6 +21,7 @@ describe('Constructor Tests', () => {
     }).then(done);
   });
 
+  /** @test {EloquaApi#getBaseURL} */
   it('Constructor with null baseURL', done => {
     let eloqua = new EloquaApi(getOptions({baseURL: null}));
     eloqua.init().then(() => {
@@ -26,6 +30,7 @@ describe('Constructor Tests', () => {
     }).then(done);
   });
 
+  /** @test {EloquaApi#getBaseURL} */
   it('Constructor with null baseURL and null username', done => {
     let eloqua = new EloquaApi(getOptions({baseURL: null, password: null}));
     eloqua.init().then(() => {
@@ -34,6 +39,7 @@ describe('Constructor Tests', () => {
     }).then(done);
   });
 
+  /** @test {EloquaApi#constructor} */
   it('Constructor with 1.0 versions', done => {
     let eloqua = new EloquaApi(getOptions({restVersion: '1.0', bulkVersion: '1.0'}));
     eloqua.init().then(() => {
@@ -42,6 +48,7 @@ describe('Constructor Tests', () => {
     }).then(done);
   });
 
+  /** @test {EloquaApi#init} */
   it('Constructor with timeout', done => {
     let eloqua = new EloquaApi(getOptions({timeout: 3000}));
     eloqua.init().then(() => {
@@ -49,6 +56,7 @@ describe('Constructor Tests', () => {
     }).then(done);
   });
 
+  /** @test {EloquaApi#setHeaders} */
   it('Constructor with oauth token', done => {
     const oauth = {
       token_type: 'bearer',
@@ -63,6 +71,7 @@ describe('Constructor Tests', () => {
     }).then(done);
   });
 
+  /** @test {EloquaApi#getPasswordBearer} */
   it('Constructor with oauth password', function (done) {
     this.timeout(240000);
     this.slow(180000);
@@ -79,7 +88,8 @@ describe('Constructor Tests', () => {
     }).then(done);
   });
 
-  it.skip('Constructor with oauth password with delay', function (done) {
+  /** @test {EloquaApi#getPasswordBearer} */
+  it('Constructor with oauth password with delay', function (done) {
     this.timeout(240000);
     this.slow(180000);
     const oauth = {
@@ -96,6 +106,7 @@ describe('Constructor Tests', () => {
     }).then(done);
   });
 
+  /** @test {EloquaApi#getPasswordBearer} */
   it('Constructor with invalid oauth password', (done) => {
     const oauth = {
       client_id: globals.CLIENT_ID,

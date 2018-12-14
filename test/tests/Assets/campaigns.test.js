@@ -1,10 +1,12 @@
-let common = require('../../common');
 let EloquaApi = common.EloquaApi;
 let getOptions = common.getOptions;
 let moxios = require('moxios');
 let sinon = require('sinon');
 
+/** @test {Campaigns} */
 describe('Campaign Tests', () => {
+
+  /** @test {Campaigns#get} */
   it('Campaign Get', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
@@ -14,6 +16,7 @@ describe('Campaign Tests', () => {
     }).then(done);
   });
 
+  /** @test {Campaigns#get} */
   it('Campaign Get with invalid credentials', done => {
     let eloqua = new EloquaApi(getOptions({baseURL: null, password: null}));
     eloqua.init().then(() => {
@@ -23,6 +26,7 @@ describe('Campaign Tests', () => {
     }).then(done);
   });
 
+  /** @test {Campaigns#getOne} */
   it('Campaign Get One', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
@@ -35,6 +39,7 @@ describe('Campaign Tests', () => {
     }).then(done);
   });
 
+  /** @test {Campaigns#getOne} */
   it('Campaign Get One with Querystring', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
@@ -47,6 +52,7 @@ describe('Campaign Tests', () => {
     }).then(done);
   });
 
+  /** @test {Campaigns#getOne} */
   it('Campaign Get One with invalid Id', done => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
@@ -56,6 +62,7 @@ describe('Campaign Tests', () => {
     }).then(done);
   });
 
+  /** @test {Campaigns#create} */
   it('Campaign Create', (done) => {
     let data = {
       name: 'Test'
@@ -81,6 +88,7 @@ describe('Campaign Tests', () => {
     });
   });
 
+  /** @test {Campaigns#create} */
   it('Campaign Create with Error', (done) => {
     let data = {
       name: 'Test'
@@ -93,6 +101,7 @@ describe('Campaign Tests', () => {
     }).then(done);
   });
 
+  /** @test {Campaigns#update} */
   it('Campaign Update', (done) => {
     let data = {
       name: 'Test'
@@ -118,6 +127,7 @@ describe('Campaign Tests', () => {
     });
   });
 
+  /** @test {Campaigns#update} */
   it('Campaign Update with Error', (done) => {
     let data = {
       name: 'Test'
@@ -130,6 +140,7 @@ describe('Campaign Tests', () => {
     }).then(done);
   });
 
+  /** @test {Campaigns#delete} */
   it('Campaign Delete', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
@@ -152,6 +163,7 @@ describe('Campaign Tests', () => {
     });
   });
 
+  /** @test {Campaigns#delete} */
   it('Campaign Delete with Error', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
@@ -161,6 +173,7 @@ describe('Campaign Tests', () => {
     }).then(done);
   });
 
+  /** @test {Campaigns#activate} */
   it('Campaign Activate', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
@@ -183,6 +196,7 @@ describe('Campaign Tests', () => {
     });
   });
 
+  /** @test {Campaigns#activate} */
   it('Campaign Activate with Error and Querystring', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
@@ -192,6 +206,7 @@ describe('Campaign Tests', () => {
     }).then(done);
   });
 
+  /** @test {Campaigns#deactivate} */
   it('Campaign Deactivate', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
@@ -214,6 +229,7 @@ describe('Campaign Tests', () => {
     });
   });
 
+  /** @test {Campaigns#deactivate} */
   it('Campaign Deactivate with Error', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {

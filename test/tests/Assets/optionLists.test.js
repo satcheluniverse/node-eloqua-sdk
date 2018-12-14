@@ -1,73 +1,69 @@
-let common = require('../../common');
 let EloquaApi = common.EloquaApi;
 let getOptions = common.getOptions;
 let moxios = require('moxios');
 let sinon = require('sinon');
 
-describe('Event Registrants Tests', () => {
-  let parentId;
+/** @test {OptionLists} */
+describe('Option List Tests', () => {
 
-  before((done) => {
+  /** @test {OptionLists#get} */
+  it('Option List Get', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.data.events.get({count: 1}).then((event) => {
-        parentId = event.elements[0].id;
-      }).then(done);
-    });
-  });
-
-  it('Event Registrants Get', done => {
-    let eloqua = new EloquaApi(getOptions());
-    eloqua.init().then(() => {
-      eloqua.data.events.registrants.get(parentId, {count: 1}).then((event) => {
-        expect(event).to.be.an('Object');
+      eloqua.assets.optionLists.get({count: 1}).then((result) => {
+        expect(result).to.be.an('Object');
       });
     }).then(done);
   });
 
-  it('Event Registrants Get with invalid credentials', done => {
+  /** @test {OptionLists#get} */
+  it('Option List Get with invalid credentials', done => {
     let eloqua = new EloquaApi(getOptions({baseURL: null, password: null}));
     eloqua.init().then(() => {
-      eloqua.data.events.registrants.get(parentId).then((event) => {
-        expect(event).to.eql('401: Unauthorized');
+      eloqua.assets.optionLists.get().then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Event Registrants Get One', done => {
+  /** @test {OptionLists#getOne} */
+  it('Option List Get One', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.data.events.registrants.get(parentId, {count: 1}).then((events) => {
-        expect(events).to.be.an('Object');
-        eloqua.data.events.registrants.getOne(parentId, events.elements[0].id).then((event) => {
-          expect(event).to.be.an('Object');
+      eloqua.assets.optionLists.get({count: 1}).then((results) => {
+        expect(results).to.be.an('Object');
+        eloqua.assets.optionLists.getOne(results.elements[0].id).then((result) => {
+          expect(result).to.be.an('Object');
         });
       });
     }).then(done);
   });
 
-  it('Event Registrants Get One with Querystring', done => {
+  /** @test {OptionLists#getOne} */
+  it('Option List Get One with Querystring', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.data.events.registrants.get(parentId, {count: 1}).then((events) => {
-        expect(events).to.be.an('Object');
-        eloqua.data.events.registrants.getOne(parentId, events.elements[0].id, {depth: 'minimal'}).then((event) => {
-          expect(event).to.be.an('Object');
+      eloqua.assets.optionLists.get({count: 1}).then((results) => {
+        expect(results).to.be.an('Object');
+        eloqua.assets.optionLists.getOne(results.elements[0].id, {depth: 'minimal'}).then((result) => {
+          expect(result).to.be.an('Object');
         });
       });
     }).then(done);
   });
 
-  it('Event Registrants Get One with invalid Id', done => {
+  /** @test {OptionLists#getOne} */
+  it('Option List Get One with invalid Id', done => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.data.events.registrants.getOne(parentId, 1).then((event) => {
-        expect(event).to.eql('401: Unauthorized');
+      eloqua.assets.optionLists.getOne(1).then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Event Registrants Create', (done) => {
+  /** @test {OptionLists#create} */
+  it('Option List Create', (done) => {
     let data = {
       name: 'Test'
     };
@@ -78,7 +74,7 @@ describe('Event Registrants Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.data.events.registrants.create(parentId, data).then(onFulfilled);
+        eloqua.assets.optionLists.create(data).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -92,19 +88,21 @@ describe('Event Registrants Tests', () => {
     });
   });
 
-  it('Event Registrants Create with Error', (done) => {
+  /** @test {OptionLists#create} */
+  it('Option List Create with Error', (done) => {
     let data = {
       name: 'Test'
     };
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.data.events.registrants.create(parentId, data).then((event) => {
-        expect(event).to.eql('401: Unauthorized');
+      eloqua.assets.optionLists.create(data).then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Event Registrants Update', (done) => {
+  /** @test {OptionLists#update} */
+  it('Option List Update', (done) => {
     let data = {
       name: 'Test'
     };
@@ -115,7 +113,7 @@ describe('Event Registrants Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.data.events.registrants.update(parentId, 1, data).then(onFulfilled);
+        eloqua.assets.optionLists.update(1, data).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -129,19 +127,21 @@ describe('Event Registrants Tests', () => {
     });
   });
 
-  it('Event Registrants Update with Error', (done) => {
+  /** @test {OptionLists#update} */
+  it('Option List Update with Error', (done) => {
     let data = {
       name: 'Test'
     };
-    let eloqua = new EloquaApi(getOptions(parentId, {sitename: 'test'}));
+    let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.data.events.registrants.update(parentId, 1, data).then((event) => {
-        expect(event).to.eql('500: InternalServerError');
+      eloqua.assets.optionLists.update(1, data).then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Event Registrants Delete', (done) => {
+  /** @test {OptionLists#delete} */
+  it('Option List Delete', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
 
@@ -149,7 +149,7 @@ describe('Event Registrants Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.data.events.registrants.delete(parentId, 1).then(onFulfilled);
+        eloqua.assets.optionLists.delete(1).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -163,11 +163,12 @@ describe('Event Registrants Tests', () => {
     });
   });
 
-  it('Event Delete with Error', (done) => {
+  /** @test {OptionLists#delete} */
+  it('Option List Delete with Error', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.data.events.registrants.delete(parentId, 1).then((event) => {
-        expect(event).to.eql('401: Unauthorized');
+      eloqua.assets.optionLists.delete(1).then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });

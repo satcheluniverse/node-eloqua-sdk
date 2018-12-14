@@ -1,73 +1,69 @@
-let common = require('../../common');
 let EloquaApi = common.EloquaApi;
 let getOptions = common.getOptions;
 let moxios = require('moxios');
 let sinon = require('sinon');
 
-describe('Custom Object Data Tests', () => {
-  let parentId;
+/** @test {Emails} */
+describe('Email Tests', () => {
 
-  before((done) => {
+  /** @test {Emails#get} */
+  it('Email Get', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.data.customObjects.get({count: 1}).then((customObject) => {
-        parentId = customObject.elements[0].id;
-      }).then(done);
-    });
-  });
-
-  it('Custom Object Data Get', done => {
-    let eloqua = new EloquaApi(getOptions());
-    eloqua.init().then(() => {
-      eloqua.data.customObjects.data.get(parentId, {count: 1}).then((customObjectData) => {
-        expect(customObjectData).to.be.an('Object');
+      eloqua.assets.emails.get({count: 1}).then((email) => {
+        expect(email).to.be.an('Object');
       });
     }).then(done);
   });
 
-  it('Custom Object Data Get with invalid credentials', done => {
+  /** @test {Emails#get} */
+  it('Email Get with invalid credentials', done => {
     let eloqua = new EloquaApi(getOptions({baseURL: null, password: null}));
     eloqua.init().then(() => {
-      eloqua.data.customObjects.data.get(parentId).then((customObjectData) => {
-        expect(customObjectData).to.eql('401: Unauthorized');
+      eloqua.assets.emails.get().then((email) => {
+        expect(email).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Custom Object Data Get One', done => {
+  /** @test {Emails#getOne} */
+  it('Email Get One', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.data.customObjects.data.get(parentId, {count: 1}).then((customObjectsData) => {
-        expect(customObjectsData).to.be.an('Object');
-        eloqua.data.customObjects.data.getOne(parentId, customObjectsData.elements[0].id).then((customObjectData) => {
-          expect(customObjectData).to.be.an('Object');
+      eloqua.assets.emails.get({count: 1}).then((emails) => {
+        expect(emails).to.be.an('Object');
+        eloqua.assets.emails.getOne(emails.elements[0].id).then((email) => {
+          expect(email).to.be.an('Object');
         });
       });
     }).then(done);
   });
 
-  it('Custom Object Data Get One with Querystring', done => {
+  /** @test {Emails#getOne} */
+  it('Email Get One with Querystring', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.data.customObjects.data.get(parentId, {count: 1}).then((customObjectsData) => {
-        expect(customObjectsData).to.be.an('Object');
-        eloqua.data.customObjects.data.getOne(parentId, customObjectsData.elements[0].id, {depth: 'minimal'}).then((customObjectData) => {
-          expect(customObjectData).to.be.an('Object');
+      eloqua.assets.emails.get({count: 1}).then((emails) => {
+        expect(emails).to.be.an('Object');
+        eloqua.assets.emails.getOne(emails.elements[0].id, {depth: 'minimal'}).then((email) => {
+          expect(email).to.be.an('Object');
         });
       });
     }).then(done);
   });
 
-  it('Custom Object Data Get One with invalid Id', done => {
+  /** @test {Emails#getOne} */
+  it('Email Get One with invalid Id', done => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.data.customObjects.data.getOne(parentId, 1).then((customObjectData) => {
-        expect(customObjectData).to.eql('401: Unauthorized');
+      eloqua.assets.emails.getOne(1).then((email) => {
+        expect(email).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Custom Object Data Create', (done) => {
+  /** @test {Emails#create} */
+  it('Email Create', (done) => {
     let data = {
       name: 'Test'
     };
@@ -78,7 +74,7 @@ describe('Custom Object Data Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.data.customObjects.data.create(parentId, data).then(onFulfilled);
+        eloqua.assets.emails.create(data).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -92,20 +88,21 @@ describe('Custom Object Data Tests', () => {
     });
   });
 
-  it('Custom Object Data Create with Error', function (done) {
-    this.timeout(100000);
+  /** @test {Emails#create} */
+  it('Email Create with Error', (done) => {
     let data = {
       name: 'Test'
     };
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.data.customObjects.data.create(parentId, data).then((customObjectData) => {
-        expect(customObjectData).to.eql('401: Unauthorized');
+      eloqua.assets.emails.create(data).then((email) => {
+        expect(email).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Custom Object Data Update', (done) => {
+  /** @test {Emails#update} */
+  it('Email Update', (done) => {
     let data = {
       name: 'Test'
     };
@@ -116,7 +113,7 @@ describe('Custom Object Data Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.data.customObjects.data.update(parentId, 1, data).then(onFulfilled);
+        eloqua.assets.emails.update(1, data).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -130,19 +127,21 @@ describe('Custom Object Data Tests', () => {
     });
   });
 
-  it('Custom Object Data Update with Error', (done) => {
+  /** @test {Emails#update} */
+  it('Email Update with Error', (done) => {
     let data = {
       name: 'Test'
     };
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.data.customObjects.data.update(parentId, 1, data).then((customObjectData) => {
-        expect(customObjectData).to.eql('401: Unauthorized');
+      eloqua.assets.emails.update(1, data).then((email) => {
+        expect(email).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Custom Object Data Delete', (done) => {
+  /** @test {Emails#delete} */
+  it('Email Delete', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
 
@@ -150,7 +149,7 @@ describe('Custom Object Data Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.data.customObjects.data.delete(parentId, 1).then(onFulfilled);
+        eloqua.assets.emails.delete(1).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -164,12 +163,18 @@ describe('Custom Object Data Tests', () => {
     });
   });
 
-  it('Custom Object Data Delete with Error', (done) => {
+  /** @test {Emails#delete} */
+  it('Email Delete with Error', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.data.customObjects.data.delete(parentId, 1).then((customObjectData) => {
-        expect(customObjectData).to.eql('401: Unauthorized');
+      eloqua.assets.emails.delete(1).then((email) => {
+        expect(email).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
+
+  require('./emailDeployments.test');
+  require('./emailFooters.test');
+  require('./emailGroups.test');
+  require('./emailHeaders.test');
 });

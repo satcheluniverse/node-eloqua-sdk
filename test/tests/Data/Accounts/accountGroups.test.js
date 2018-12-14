@@ -1,62 +1,69 @@
-let common = require('../../common');
 let EloquaApi = common.EloquaApi;
 let getOptions = common.getOptions;
 let moxios = require('moxios');
 let sinon = require('sinon');
 
-describe('External Asset Tests', () => {
-  it('External Asset Get', done => {
+/** @test {AccountGroups} */
+describe('Account Group Tests', () => {
+
+  /** @test {AccountGroups#get} */
+  it('Account Group Get', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.get({count: 1}).then((externalAsset) => {
-        expect(externalAsset).to.be.an('Object');
+      eloqua.data.accounts.groups.get({count: 1}).then((result) => {
+        expect(result).to.be.an('Object');
       });
     }).then(done);
   });
 
-  it('External Asset Get with invalid credentials', done => {
+  /** @test {AccountGroups#get} */
+  it('Account Group Get with invalid credentials', done => {
     let eloqua = new EloquaApi(getOptions({baseURL: null, password: null}));
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.get().then((externalAsset) => {
-        expect(externalAsset).to.eql('401: Unauthorized');
+      eloqua.data.accounts.groups.get().then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('External Asset Get One', done => {
+  /** @test {AccountGroups#getOne} */
+  it('Account Group Get One', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.get({count: 1}).then((externalAssets) => {
-        expect(externalAssets).to.be.an('Object');
-        eloqua.assets.externalAssets.getOne(externalAssets.elements[0].id).then((externalAsset) => {
-          expect(externalAsset).to.be.an('Object');
+      eloqua.data.accounts.groups.get({count: 1}).then((results) => {
+        expect(results).to.be.an('Object');
+        eloqua.data.accounts.groups.getOne(results.elements[0].id).then((result) => {
+          expect(result).to.be.an('Object');
         });
       });
     }).then(done);
   });
 
-  it('External Asset Get One with Querystring', done => {
+  /** @test {AccountGroups#getOne} */
+  it('Account Group Get One with Querystring', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.get({count: 1}).then((externalAssets) => {
-        expect(externalAssets).to.be.an('Object');
-        eloqua.assets.externalAssets.getOne(externalAssets.elements[0].id, {depth: 'minimal'}).then((externalAsset) => {
-          expect(externalAsset).to.be.an('Object');
+      eloqua.data.accounts.groups.get({count: 1}).then((results) => {
+        expect(results).to.be.an('Object');
+        eloqua.data.accounts.groups.getOne(results.elements[0].id, {depth: 'minimal'}).then((result) => {
+          expect(result).to.be.an('Object');
         });
       });
     }).then(done);
   });
 
-  it('External Asset Get One with invalid Id', done => {
+  /** @test {AccountGroups#getOne} */
+  it('Account Group Get One with invalid Id', done => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.getOne(1).then((externalAsset) => {
-        expect(externalAsset).to.eql('401: Unauthorized');
+      eloqua.data.accounts.groups.getOne(1).then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('External Asset Create', (done) => {
+  /** @test {AccountGroups#create} */
+  it('Account Group Create', (done) => {
     let data = {
       name: 'Test'
     };
@@ -67,7 +74,7 @@ describe('External Asset Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.assets.externalAssets.create(data).then(onFulfilled);
+        eloqua.data.accounts.groups.create(data).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -81,19 +88,21 @@ describe('External Asset Tests', () => {
     });
   });
 
-  it('External Asset Create with Error', (done) => {
+  /** @test {AccountGroups#create} */
+  it('Account Group Create with Error', (done) => {
     let data = {
       name: 'Test'
     };
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.create(data).then((externalAsset) => {
-        expect(externalAsset).to.eql('401: Unauthorized');
+      eloqua.data.accounts.groups.create(data).then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('External Asset Update', (done) => {
+  /** @test {AccountGroups#update} */
+  it('Account Group Update', (done) => {
     let data = {
       name: 'Test'
     };
@@ -104,7 +113,7 @@ describe('External Asset Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.assets.externalAssets.update(1, data).then(onFulfilled);
+        eloqua.data.accounts.groups.update(1, data).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -118,19 +127,21 @@ describe('External Asset Tests', () => {
     });
   });
 
-  it('External Asset Update with Error', (done) => {
+  /** @test {AccountGroups#update} */
+  it('Account Group Update with Error', (done) => {
     let data = {
       name: 'Test'
     };
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.update(1, data).then((externalAsset) => {
-        expect(externalAsset).to.eql('401: Unauthorized');
+      eloqua.data.accounts.groups.update(1, data).then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('External Asset Delete', (done) => {
+  /** @test {AccountGroups#delete} */
+  it('Account Group Delete', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
 
@@ -138,7 +149,7 @@ describe('External Asset Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.assets.externalAssets.delete(1).then(onFulfilled);
+        eloqua.data.accounts.groups.delete(1).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -152,11 +163,12 @@ describe('External Asset Tests', () => {
     });
   });
 
-  it('External Asset Delete with Error', (done) => {
+  /** @test {AccountGroups#delete} */
+  it('Account Group Delete with Error', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.assets.externalAssets.delete(1).then((externalAsset) => {
-        expect(externalAsset).to.eql('401: Unauthorized');
+      eloqua.data.accounts.groups.delete(1).then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });

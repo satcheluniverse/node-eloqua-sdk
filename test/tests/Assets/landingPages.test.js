@@ -1,10 +1,12 @@
-let common = require('../../common');
 let EloquaApi = common.EloquaApi;
 let getOptions = common.getOptions;
 let moxios = require('moxios');
 let sinon = require('sinon');
 
+/** @test {LandingPages} */
 describe('Landing Page Tests', () => {
+
+  /** @test {LandingPages#get} */
   it('Landing Page Get', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
@@ -14,6 +16,7 @@ describe('Landing Page Tests', () => {
     }).then(done);
   });
 
+  /** @test {LandingPages#get} */
   it('Landing Page Get with invalid credentials', done => {
     let eloqua = new EloquaApi(getOptions({baseURL: null, password: null}));
     eloqua.init().then(() => {
@@ -23,6 +26,7 @@ describe('Landing Page Tests', () => {
     }).then(done);
   });
 
+  /** @test {LandingPages#getOne} */
   it('Landing Page Get One', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
@@ -35,6 +39,7 @@ describe('Landing Page Tests', () => {
     }).then(done);
   });
 
+  /** @test {LandingPages#getOne} */
   it('Landing Page Get One with Querystring', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
@@ -47,6 +52,7 @@ describe('Landing Page Tests', () => {
     }).then(done);
   });
 
+  /** @test {LandingPages#getOne} */
   it('Landing Page Get One with invalid Id', done => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
@@ -56,6 +62,7 @@ describe('Landing Page Tests', () => {
     }).then(done);
   });
 
+  /** @test {LandingPages#create} */
   it('Landing Page Create', (done) => {
     let data = {
       name: 'Test'
@@ -81,6 +88,7 @@ describe('Landing Page Tests', () => {
     });
   });
 
+  /** @test {LandingPages#create} */
   it('Landing Page Create with Error', (done) => {
     let data = {
       name: 'Test'
@@ -93,6 +101,7 @@ describe('Landing Page Tests', () => {
     }).then(done);
   });
 
+  /** @test {LandingPages#update} */
   it('Landing Page Update', (done) => {
     let data = {
       name: 'Test'
@@ -118,6 +127,7 @@ describe('Landing Page Tests', () => {
     });
   });
 
+  /** @test {LandingPages#update} */
   it('Landing Page Update with Error', (done) => {
     let data = {
       name: 'Test'
@@ -130,6 +140,7 @@ describe('Landing Page Tests', () => {
     }).then(done);
   });
 
+  /** @test {LandingPages#delete} */
   it('Landing Page Delete', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
@@ -152,6 +163,7 @@ describe('Landing Page Tests', () => {
     });
   });
 
+  /** @test {LandingPages#delete} */
   it('Landing Page Delete with Error', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {

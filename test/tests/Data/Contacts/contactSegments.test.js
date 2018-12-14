@@ -1,62 +1,69 @@
-let common = require('../../common');
 let EloquaApi = common.EloquaApi;
 let getOptions = common.getOptions;
 let moxios = require('moxios');
 let sinon = require('sinon');
 
-describe('Event Tests', () => {
-  it('Event Get', done => {
+/** @test {ContactSegmnets} */
+describe('Contact Segmnet Tests', () => {
+
+  /** @test {ContactSegmnets#get} */
+  it('Contact Segmnet Get', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.data.events.get({count: 1}).then((event) => {
-        expect(event).to.be.an('Object');
+      eloqua.data.contacts.segments.get({count: 1}).then((result) => {
+        expect(result).to.be.an('Object');
       });
     }).then(done);
   });
 
-  it('Event Get with invalid credentials', done => {
+  /** @test {ContactSegmnets#get} */
+  it('Contact Segmnet Get with invalid credentials', done => {
     let eloqua = new EloquaApi(getOptions({baseURL: null, password: null}));
     eloqua.init().then(() => {
-      eloqua.data.events.get().then((event) => {
-        expect(event).to.eql('401: Unauthorized');
+      eloqua.data.contacts.segments.get().then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Event Get One', done => {
+  /** @test {ContactSegmnets#getOne} */
+  it('Contact Segmnet Get One', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.data.events.get({count: 1}).then((events) => {
-        expect(events).to.be.an('Object');
-        eloqua.data.events.getOne(events.elements[0].id).then((event) => {
-          expect(event).to.be.an('Object');
+      eloqua.data.contacts.segments.get({count: 1}).then((results) => {
+        expect(results).to.be.an('Object');
+        eloqua.data.contacts.segments.getOne(results.elements[0].id).then((result) => {
+          expect(result).to.be.an('Object');
         });
       });
     }).then(done);
   });
 
-  it('Event Get One with Querystring', done => {
+  /** @test {ContactSegmnets#getOne} */
+  it('Contact Segmnet Get One with Querystring', done => {
     let eloqua = new EloquaApi(getOptions());
     eloqua.init().then(() => {
-      eloqua.data.events.get({count: 1}).then((events) => {
-        expect(events).to.be.an('Object');
-        eloqua.data.events.getOne(events.elements[0].id, {depth: 'minimal'}).then((event) => {
-          expect(event).to.be.an('Object');
+      eloqua.data.contacts.segments.get({count: 1}).then((results) => {
+        expect(results).to.be.an('Object');
+        eloqua.data.contacts.segments.getOne(results.elements[0].id, {depth: 'minimal'}).then((result) => {
+          expect(result).to.be.an('Object');
         });
       });
     }).then(done);
   });
 
-  it('Event Get One with invalid Id', done => {
+  /** @test {ContactSegmnets#getOne} */
+  it('Contact Segmnet Get One with invalid Id', done => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.data.events.getOne(1).then((event) => {
-        expect(event).to.eql('401: Unauthorized');
+      eloqua.data.contacts.segments.getOne(1).then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Event Create', (done) => {
+  /** @test {ContactSegmnets#create} */
+  it('Contact Segmnet Create', (done) => {
     let data = {
       name: 'Test'
     };
@@ -67,7 +74,7 @@ describe('Event Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.data.events.create(data).then(onFulfilled);
+        eloqua.data.contacts.segments.create(data).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -81,19 +88,21 @@ describe('Event Tests', () => {
     });
   });
 
-  it('Event Create with Error', (done) => {
+  /** @test {ContactSegmnets#create} */
+  it('Contact Segmnet Create with Error', (done) => {
     let data = {
       name: 'Test'
     };
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.data.events.create(data).then((event) => {
-        expect(event).to.eql('401: Unauthorized');
+      eloqua.data.contacts.segments.create(data).then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Event Update', (done) => {
+  /** @test {ContactSegmnets#update} */
+  it('Contact Segmnet Update', (done) => {
     let data = {
       name: 'Test'
     };
@@ -104,7 +113,7 @@ describe('Event Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.data.events.update(1, data).then(onFulfilled);
+        eloqua.data.contacts.segments.update(1, data).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -118,19 +127,21 @@ describe('Event Tests', () => {
     });
   });
 
-  it('Event Update with Error', (done) => {
+  /** @test {ContactSegmnets#update} */
+  it('Contact Segmnet Update with Error', (done) => {
     let data = {
       name: 'Test'
     };
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.data.events.update(1, data).then((event) => {
-        expect(event).to.eql('401: Unauthorized');
+      eloqua.data.contacts.segments.update(1, data).then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
 
-  it('Event Delete', (done) => {
+  /** @test {ContactSegmnets#delete} */
+  it('Contact Segmnet Delete', (done) => {
     let eloqua = new EloquaApi(getOptions({isTest: true}));
     eloqua.init().then(() => {
 
@@ -138,7 +149,7 @@ describe('Event Tests', () => {
 
       moxios.withMock(() => {
         let onFulfilled = sinon.spy();
-        eloqua.data.events.delete(1).then(onFulfilled);
+        eloqua.data.contacts.segments.delete(1).then(onFulfilled);
         moxios.wait(() => {
           let request = moxios.requests.mostRecent();
           request.respondWith({
@@ -152,11 +163,12 @@ describe('Event Tests', () => {
     });
   });
 
-  it('Event Delete with Error', (done) => {
+  /** @test {ContactSegmnets#delete} */
+  it('Contact Segmnet Delete with Error', (done) => {
     let eloqua = new EloquaApi(getOptions({sitename: 'test'}));
     eloqua.init().then(() => {
-      eloqua.data.events.delete(1).then((event) => {
-        expect(event).to.eql('401: Unauthorized');
+      eloqua.data.contacts.segments.delete(1).then((result) => {
+        expect(result).to.eql('401: Unauthorized');
       });
     }).then(done);
   });
