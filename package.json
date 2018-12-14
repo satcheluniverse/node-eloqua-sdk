@@ -1,9 +1,8 @@
 {
-  "name": "@jeffbaldwinjr/eloqua-sdk",
+  "name": "eloqua-sdk",
   "version": "0.8.2",
   "description": "SDK to interact with Oracle Eloqua API",
   "main": "./lib/eloqua.js",
-  "private": true,
   "scripts": {
     "docs-build": "rm -rf docs && esdoc -c esdoc.json",
     "release": "release-it",
