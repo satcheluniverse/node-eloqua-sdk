@@ -8,7 +8,7 @@ A node.js module, which provides a simple wrapper for the Eloqua API.
 [![Coverage Status](https://coveralls.io/repos/github/jeffbaldwinjr/node-eloqua-sdk/badge.svg?branch=master)](https://coveralls.io/github/jeffbaldwinjr/node-eloqua-sdk?branch=master)
 [![install size](https://packagephobia.now.sh/badge?p=eloqua-sdk)](https://packagephobia.now.sh/result?p=eloqua-sdk)
 [![npm downloads](https://img.shields.io/npm/dm/eloqua-sdk.svg?style=flat-square)](http://npm-stat.com/charts.html?package=eloqua-sdk)
-[![Dependencies](https://david-dm.org/jeffbaldwinjr/node-eloqua-sdk.svg)](https://david-dm.org/jeffbaldwinjr/node-eloqua-sdk)
+[![Dependencies](https://david-dm.org/jeffbaldwinjr/node-eloqua-sdk.svg)](https://david-dm.org/jeffbaldwinjr/node-eloqua-sdk) [![Greenkeeper badge](https://badges.greenkeeper.io/jeffbaldwinjr/node-eloqua-sdk.svg)](https://greenkeeper.io/)
 
 ## Getting Started
 
