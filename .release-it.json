@@ -11,7 +11,8 @@
     "push": true,
     "pushArgs": "",
     "pushRepo": "origin",
-    "requireUpstream": false
+    "requireUpstream": false,
+    "requireCleanWorkingDir": false
   },
   "github": {
     "release": true
@@ -25,7 +26,7 @@
       "beforeStage": "cp -a ../docs/. ./ && cp -a ../coverage/. ./coverage/"
     },
     "git": {
-      "addUntrackedFiles": false,
+      "addUntrackedFiles": true,
       "commit": true,
       "tag": true,
       "push": true
