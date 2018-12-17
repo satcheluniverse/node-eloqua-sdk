@@ -25,70 +25,67 @@ $ npm install eloqua-sdk
 // With ES5
 var EloquaApi = require('eloqua-sdk');
 
-var eloqua = new EloquaApi();
-eloqua.init({
-  sitename: '[[Your Sitename]]',
-  username: '[[Your Username]]',
-  password: '[[Your Password]]',
-  basic: true,
-}).then((eloqua) => {
-  // Perform eloqua calls here
-});
+var eloqua_config = {
+                      sitename: '[[Your Sitename]]',
+                      username: '[[Your Username]]',
+                      password: '[[Your Password]]'
+                    };
 
+var eloqua = new EloquaApi(eloqua_config);
+````
+```javascript
 // With ES6
 import EloquaApi from 'eloqua-sdk';
 
-const eloqua = new EloquaApi();
-eloqua.init({
-  sitename: '[[Your Sitename]]',
-  username: '[[Your Username]]',
-  password: '[[Your Password]]',
-  basic: true,
-}).then((eloqua) => {
-    // Perform eloqua calls here
-});
+const eloqua_config = {
+                      sitename: '[[Your Sitename]]',
+                      username: '[[Your Username]]',
+                      password: '[[Your Password]]'
+                    };
 
+const eloqua = new EloquaApi(eloqua_config);
+```
+```javascript
 // With ES7
 import EloquaApi from 'eloqua-sdk';
 
-const eloqua_client = new EloquaApi();
-async function config() {
-  const eloqua = await eloqua_client.init({
-    sitename: '[[Your Sitename]]',
-    username: '[[Your Username]]',
-    password: '[[Your Password]]',
-    basic: true,
-  });
-}
-config();
+const eloqua_config = {
+                      sitename: '[[Your Sitename]]',
+                      username: '[[Your Username]]',
+                      password: '[[Your Password]]'
+                    };
+
+const eloqua = new EloquaApi(eloqua_config);
 ```
 
 ### Get a campaign name
 
 ```javascript
 // ES5
-eloqua.campaigns()
+eloqua.assets.campaigns.get()
   .then(function(results) {
-    console.log('Campaign Name: ' + results.elements[0].name);
+    console.log('Campaign Name: ' + results.data.elements[0].name);
   })
   .catch(function(err) {
     console.error(err);
   });
-
+```
+```javascript
 // ES6
-eloqua.campaigns()
+eloqua.assets.campaigns.get()
   .then(results => {
-    console.log(`Campaign Name: ${results.elements[0].name}`);
+    console.log(`Campaign Name: ${results.data.elements[0].name}`);
   })
   .catch(err => {
     console.error(err);
   });
-
+```
+```javascript
 // ES7
 async function getCampaigns() {
   try {
-    const results = await eloqua.campaigns();
-    console.log(`Campaign Name: ${results.elements[0].name}`);
+    const results = await eloqua.assets.campaigns.get();
+    console.log(`Campaign Name: ${results.data.elements[0].name}`);
   } catch(err) {
     console.error(err);
   }

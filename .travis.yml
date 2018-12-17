@@ -1,13 +1,31 @@
+sudo: false
 language: node_js
-
 node_js:
-  - stable
-
-install:
-  - npm install
-
+  - '6'
+  - '8'
+  - '10'
+  - node
+os:
+  - windows
+  - linux
+  - osx
+cache:
+  directories:
+    - node_modules
+before_install: npm install -g npm@latest
+before_script:
+  - npm run lint
 script:
-  - npm run test
-
+  - npm run test-coverage
 after_success:
-  - npm run test-report-coveralls
+  - npm run coveralls
+before_deploy:
+  - npm run build
+deploy:
+  provider: npm
+  skip_cleanup: true
+  on:
+    tags: true
+  email: jeffbaldwinjr@gmail.com
+  api_key:
+    secure: Ji6q+0JgQjObfk6LFvu8kHZIEYAuhRyTN/lQTPwLtFFO0SIHK15dM+5BsFcvvW9at2AgkhbKOA712KqQIwQ2p95gn+wTqniZ/vrv5yBAduxYQFeggCl7r4VFp2Npzr5gSWrFt8ypYDASJULZUkoRrfhee8+R+RU+auKZslH2eI8IdO4jlnW9umfR75KzUVKMyV9PFh5Le9ZphAkNCy+CW7SIk+eviYsqFrV2eMQ1vekz91YnPnDcpv0peL/7+BRaVz08+Fn3fWjzefMj3HY6YNIQzcFRsMMb9IQrje4z8mBapaKgS36cmdvA/wMxTleiHyyYssMbm85iIs7EMdPnsZHZJx2WSjeE31ZCFSLxHxqX3pUsnd99xvrbzjauecuCJklfziXrDXRiKcGs5St/DNET3unOPZuMV4KYuspM94jMXqjRFKu6+iSNsW+OIWjwm22EC6EvEFU86J+QacmBKnDSAxINiaDQ7+Qbv5dHL76Ov2CJd785/RaL0fgsSbTgXOUu8DA679R6DrJ0FZvoKawpcRXF5iN5Fl0Dz2hTXs1knp5BG+1RPqPBRO4rMKO7R8mGSwOqFKXPy12xXYJayWokcGRzrB0Tb5fd0hpmPDCl7AEdVVyDsuSZzQ2dYGXqrxAknE+rzvYiRyRoLw+sxtW+l15wwa8Q4u9auqQ3ZFI=
