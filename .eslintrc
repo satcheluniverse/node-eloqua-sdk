@@ -4,176 +4,27 @@
     "mocha": true,
     "es6": true
   },
-  "extends": "eslint:recommended",
   "parserOptions": {
-    "ecmaVersion": 2017,
+    "ecmaVersion": 8,
     "sourceType": "module"
   },
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "prettier"
+  ],
   "rules": {
-    "block-scoped-var": [
-      "error"
-    ],
-    "callback-return": [
+    "prettier/prettier": [
       "error",
-      [
-        "done",
-        "proceed",
-        "next",
-        "onwards",
-        "callback",
-        "cb"
-      ]
-    ],
-    "camelcase": [
-      "warn",
       {
-        "properties": "always",
-        "allow": [
-          "access_token",
-          "grant_type",
-          "token_type",
-          "refresh_token",
-          "client_id",
-          "client_secret"
-        ]
+        "singleQuote": true,
+        "printWidth": 120
       }
-    ],
-    "comma-style": [
-      "warn",
-      "last"
-    ],
-    "curly": [
-      "warn"
-    ],
-    "eqeqeq": [
-      "error",
-      "always"
-    ],
-    "eol-last": [
-      "warn"
-    ],
-    "handle-callback-err": [
-      "error"
-    ],
-    "indent": [
-      "warn",
-      2,
-      {
-        "SwitchCase": 1,
-        "MemberExpression": "off",
-        "FunctionDeclaration": {
-          "body": 1,
-          "parameters": "off"
-        },
-        "FunctionExpression": {
-          "body": 1,
-          "parameters": "off"
-        },
-        "CallExpression": {
-          "arguments": "off"
-        },
-        "ArrayExpression": 1,
-        "ObjectExpression": 1,
-        "ignoredNodes": [
-          "ConditionalExpression"
-        ]
-      }
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "no-dupe-keys": [
-      "error"
-    ],
-    "no-duplicate-case": [
-      "error"
-    ],
-    "no-extra-semi": [
-      "warn"
-    ],
-    "no-labels": [
-      "error"
-    ],
-    "no-mixed-spaces-and-tabs": [
-      2,
-      "smart-tabs"
-    ],
-    "no-prototype-builtins": [
-      "warn"
-    ],
-    "no-redeclare": [
-      "warn"
-    ],
-    "no-return-assign": [
-      "error",
-      "always"
-    ],
-    "no-sequences": [
-      "error"
-    ],
-    "no-trailing-spaces": [
-      "warn"
-    ],
-    "no-undef": [
-      "error"
-    ],
-    "no-unexpected-multiline": [
-      "warn"
-    ],
-    "no-unreachable": [
-      "warn"
     ],
     "no-unused-vars": [
-      "warn",
-      {
-        "caughtErrors": "all",
-        "caughtErrorsIgnorePattern": "^unused($|[A-Z].*$)",
-        "argsIgnorePattern": "^unused($|[A-Z].*$)",
-        "varsIgnorePattern": "^unused($|[A-Z].*$)"
-      }
-    ],
-    "no-use-before-define": [
-      "error",
-      {
-        "functions": false
-      }
-    ],
-    "one-var": [
-      "warn",
-      "never"
-    ],
-    "prefer-arrow-callback": [
-      "warn",
-      {
-        "allowNamedFunctions": true
-      }
-    ],
-    "prefer-spread": [
       "warn"
-    ],
-    "quotes": [
-      "warn",
-      "single",
-      {
-        "avoidEscape": false,
-        "allowTemplateLiterals": true
-      }
-    ],
-    "semi": [
-      "warn",
-      "always"
-    ],
-    "semi-spacing": [
-      "warn",
-      {
-        "before": false,
-        "after": true
-      }
-    ],
-    "semi-style": [
-      "warn",
-      "last"
     ]
   }
 }

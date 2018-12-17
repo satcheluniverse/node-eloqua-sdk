@@ -5,7 +5,9 @@
   "main": "./lib/eloqua.js",
   "scripts": {
     "docs-build": "rm -rf docs && esdoc -c esdoc.json",
-    "test": "eslint ./ && nyc mocha",
+    "lint": "eslint lib test",
+    "format": "prettier --write \"{lib,test}/**/*.js\"",
+    "test": "nyc mocha",
     "test-report-html": "rm -rf coverage && nyc report --reporter=html",
     "test-report-coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -42,14 +44,17 @@
     "esdoc": "^1.1.0",
     "esdoc-external-nodejs-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
-    "eslint": "^5.9.0",
+    "eslint": "^5.10.0",
+    "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-mocha": "^5.2.0",
+    "eslint-plugin-prettier": "^3.0.0",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
     "moxios": "^0.4.0",
     "nyc": "^13.1.0",
+    "prettier": "^1.15.3",
     "release-it": "^9.1.0",
-    "sinon": "^7.1.1"
+    "sinon": "^7.2.2"
   },
   "dependencies": {
     "axios": "^0.18.0"

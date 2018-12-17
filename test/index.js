@@ -4,7 +4,7 @@ let common = require('./common');
 global.expect = common.expect;
 global.common = common;
 
-describe('Eloqua API Tests', function () {
+describe('Eloqua API Tests', function() {
   this.slow(5000);
   this.timeout(10000);
   // this.retries(3);
