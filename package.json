@@ -5,14 +5,9 @@
   "main": "./lib/eloqua.js",
   "scripts": {
     "docs-build": "rm -rf docs && esdoc -c esdoc.json",
-    "release": "release-it",
-    "lint": "eslint ./",
-    "mocha": "nyc mocha",
-    "test": "npm run lint && npm run mocha",
-    "test-report-html": "nyc report --reporter=html",
-    "test-report-coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "test-local": "npm test && npm run test-report-html",
-    "test-travis-ci": "npm test && npm run docs-build && npm run test-report-html && npm run test-report-coveralls"
+    "test": "eslint ./ && nyc mocha",
+    "test-report-html": "rm -rf coverage && nyc report --reporter=html",
+    "test-report-coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",

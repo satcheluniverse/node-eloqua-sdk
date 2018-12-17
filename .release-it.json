@@ -22,7 +22,11 @@
   "dist": {
     "repo": "https://github.com/jeffbaldwinjr/node-eloqua-sdk.git#gh-pages",
     "scripts": {
-      "beforeStage": "npm run docs-build && npm run test-local && cp -a /docs/. /.stage/ && cp -a /coverage/. /.stage/coverage/ && rm -rf docs && rm -rf coverage"
+      "beforeStage": "npm run docs-build && npm run test && npm run test-report-html && cp -a ../docs/. ./ && cp -a ../coverage/. ./coverage/"
     }
+  },
+  "scripts": {
+    "beforeStart": "npm install",
+    "afterRelease": "rm -rf docs && rm -rf coverage && rm -rf .nyc_output && rm -rf .stage"
   }
 }
