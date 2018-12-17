@@ -1,7 +1,6 @@
 {
   "verbose": true,
-  "requireUpstream": false,
-  "src": {
+  "git": {
     "commit": true,
     "commitMessage": "Release ${version}",
     "commitArgs": "",
@@ -12,8 +11,7 @@
     "push": true,
     "pushArgs": "",
     "pushRepo": "origin",
-    "beforeStartCommand": false,
-    "afterReleaseCommand": false
+    "requireUpstream": false
   },
   "github": {
     "release": true
@@ -23,9 +21,8 @@
   },
   "dist": {
     "repo": "https://github.com/jeffbaldwinjr/node-eloqua-sdk.git#gh-pages",
-    "beforeStageCommand": "cat docs > docs"
-  },
-  "scripts": {
-    "beforeStage": "npm run docs-build"
+    "scripts": {
+      "beforeStage": "npm run docs-build && npm run test-local && cp -a /docs/. /.stage/ && cp -a /coverage/. /.stage/coverage/ && rm -rf docs && rm -rf coverage"
+    }
   }
 }
