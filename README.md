@@ -67,8 +67,6 @@ config();
 
 ```javascript
 // ES5
-// We are using an ES5 Polyfill for Promise support. Please note that if you don't explicitly
-// apply a catch exceptions will get swallowed. Read up on ES6 Promises for further details.
 eloqua.campaigns()
   .then(function(results) {
     console.log('Campaign Name: ' + results.elements[0].name);

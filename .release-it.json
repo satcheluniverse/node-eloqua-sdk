@@ -23,6 +23,12 @@
     "repo": "https://github.com/jeffbaldwinjr/node-eloqua-sdk.git#gh-pages",
     "scripts": {
       "beforeStage": "cp -a ../docs/. ./ && cp -a ../coverage/. ./coverage/"
+    },
+    "git": {
+      "addUntrackedFiles": false,
+      "commit": true,
+      "tag": true,
+      "push": true
     }
   },
   "scripts": {
