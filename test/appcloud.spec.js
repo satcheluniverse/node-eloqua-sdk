@@ -1,0 +1,3 @@
+/** @ignore */
+describe('Appcloud Tests', () => {
+});
