@@ -22,12 +22,14 @@ gulp.task('lint', function() {
   return gulp.src(ALL_SOURCES)
     .pipe(eslint())
     .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-    ;
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('clean', function() {
-  return Promise.all([del('dist/'), del('coverage/')]);
+  return Promise.all([
+    del('dist/'),
+    del('coverage/'),
+  ]);
 });
 
 const bundledConfig = {
@@ -61,8 +63,7 @@ gulp.task('build:components', function() {
     .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('dist'))
-    ;
+    .pipe(gulp.dest('dist'));
 });
 gulp.task('coveralls', () => {
   return gulp.src('coverage/lcov.info').pipe(coveralls());
@@ -87,15 +88,14 @@ function buildBundle(options, extname, minify) {
 
   return stream.pipe(rename({extname}))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('dist'))
-    ;
+    .pipe(gulp.dest('dist'));
 }
 
 gulp.task('build', gulp.series(
-  //'build:bundled:min',
-  //'build:external:min',
-  'build:bundled:debug',
-  'build:external:debug',
+  // 'build:bundled:min',
+  // 'build:external:min',
+  // 'build:bundled:debug',
+  // 'build:external:debug',
   'build:components',
 ));
 gulp.task('coverage', gulp.parallel('coveralls', 'codecov'));

@@ -2,7 +2,7 @@
   "name": "eloqua-sdk",
   "version": "0.9.1-rc.2",
   "description": "SDK to interact with Oracle Eloqua API",
-  "main": "dist/components/Eloqua.js",
+  "main": "dist/Eloqua.js",
   "readmeFilename": "README.md",
   "scripts": {
     "clean": "gulp clean",
