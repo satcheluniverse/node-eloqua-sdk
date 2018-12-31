@@ -33,7 +33,7 @@
     }
   },
   "scripts": {
-    "beforeStart": "npm install && npm run docs-build && npm run test && npm run test-report-html",
-    "afterRelease": "rm -rf docs && rm -rf coverage && rm -rf .nyc_output"
+    "beforeStart": "npm install && gulp build",
+    "afterRelease": "gulp clean:docs && gulp clean:dist"
   }
 }
