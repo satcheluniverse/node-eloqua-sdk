@@ -1,6 +1,6 @@
 {
   "name": "eloqua-sdk",
-  "version": "0.9.1-rc.2",
+  "version": "1.0.0",
   "description": "SDK to interact with Oracle Eloqua API",
   "main": "dist/Eloqua.js",
   "readmeFilename": "README.md",
