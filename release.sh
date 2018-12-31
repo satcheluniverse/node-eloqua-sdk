@@ -37,3 +37,5 @@ echo $VERSION >> _data/versions.csv
 git add .
 git commit -m "adding docs for v$VERSION"
 git push
+
+git checkout release-$VERSION
