@@ -12,7 +12,7 @@
     "test-verbose": "cross-env DEBUG=eloqua* npm test",
     "lint": "gulp lint",
     "make-docs": "node_modules/.bin/jsdoc -c .jsdoc.json --verbose",
-    "release": "release.sh",
+    "release": "./release.sh",
     "coverage": "gulp coverage"
   },
   "repository": {

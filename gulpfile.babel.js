@@ -29,6 +29,8 @@ gulp.task('clean', function() {
   return Promise.all([
     del('dist/'),
     del('coverage/'),
+    del('docs/'),
+    del('.nyc_output/'),
   ]);
 });
 
