@@ -53,7 +53,7 @@
     ],
     "spaced-comment": "error",
     "valid-jsdoc": [
-      "error",
+      "warn",
       {
         "requireParamDescription": true
       }
