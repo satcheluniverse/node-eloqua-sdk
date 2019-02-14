@@ -69,7 +69,7 @@
     "mocha": "^4.1.0",
     "must": "^0.13.4",
     "nock": "^10.0.4",
-    "nyc": "^13.1.0",
+    "nyc": "^13.3.0",
     "release-it": "^10.0.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
