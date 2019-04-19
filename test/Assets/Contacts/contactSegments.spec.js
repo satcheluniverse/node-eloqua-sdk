@@ -28,7 +28,7 @@ describe('Contact Segmnet Tests', () => {
   it('Contact Segmnet Get', done => {
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.contacts.segments.get(null, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.segments.get(null, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/segments');
       done();
     }));
@@ -38,7 +38,7 @@ describe('Contact Segmnet Tests', () => {
   it('Contact Segmnet Get with Querystring', done => {
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.contacts.segments.get({count: 1}, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.segments.get({count: 1}, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/segments');
       expect(xhr.config.params).to.eql({count: 1});
       done();
@@ -49,7 +49,7 @@ describe('Contact Segmnet Tests', () => {
   it('Contact Segmnet Get One', done => {
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.contacts.segments.getOne(1, null, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.segments.getOne(1, null, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/segment/1');
       done();
     }));
@@ -59,7 +59,7 @@ describe('Contact Segmnet Tests', () => {
   it('Contact Segmnet Get One with Querystring', done => {
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.contacts.segments.getOne(1, {depth: 'minimal'}, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.segments.getOne(1, {depth: 'minimal'}, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/segment/1');
       expect(xhr.config.params).to.eql({depth: 'minimal'});
       done();
@@ -73,7 +73,7 @@ describe('Contact Segmnet Tests', () => {
     };
     eloqua = new Eloqua(getOptions({isTest: true}));
 
-    eloqua.data.contacts.segments.create(data, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.segments.create(data, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/segment');
       expect(xhr.config.method).to.eql('post');
       done();
@@ -87,7 +87,7 @@ describe('Contact Segmnet Tests', () => {
     };
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.contacts.segments.update(1, data, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.segments.update(1, data, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/segment/1');
       expect(xhr.config.method).to.eql('put');
       done();
@@ -98,7 +98,7 @@ describe('Contact Segmnet Tests', () => {
   it('Contact Segmnet Delete', done => {
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.contacts.segments.delete(1, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.segments.delete(1, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/segment/1');
       expect(xhr.config.method).to.eql('delete');
       done();
