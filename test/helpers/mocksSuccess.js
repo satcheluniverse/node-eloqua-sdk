@@ -1963,3 +1963,20 @@ export function bulkSyncsResponse() {
     .reply(200, {test: 'test'});
   return syncs;
 }
+
+export function assetsTrackedURLsResponse() {
+  let events;
+  events = nock('https://secure.p01.eloqua.com')
+    .get('/API/REST/2.0/assets/trackedUrls')
+    .optionally()
+    .reply(200, {
+      'test': 'test',
+    })
+    .get('/API/REST/2.0/assets/trackedUrls')
+    .query({count: 1})
+    .optionally()
+    .reply(200, {
+      'test': 'test',
+    });
+  return events;
+}

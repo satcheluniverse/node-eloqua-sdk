@@ -28,7 +28,7 @@ describe('Contact Field Tests', () => {
   it('Contact Field Get', done => {
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.contacts.fields.get(null, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.fields.get(null, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/fields');
       done();
     }));
@@ -38,7 +38,7 @@ describe('Contact Field Tests', () => {
   it('Contact Field Get with Querystring', done => {
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.contacts.fields.get({count: 1}, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.fields.get({count: 1}, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/fields');
       expect(xhr.config.params).to.eql({count: 1});
       done();
@@ -49,7 +49,7 @@ describe('Contact Field Tests', () => {
   it('Contact Field Get One', done => {
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.contacts.fields.getOne(1, null, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.fields.getOne(1, null, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/field/1');
       done();
     }));
@@ -59,7 +59,7 @@ describe('Contact Field Tests', () => {
   it('Contact Field Get One with Querystring', done => {
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.contacts.fields.getOne(1, {depth: 'minimal'}, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.fields.getOne(1, {depth: 'minimal'}, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/field/1');
       expect(xhr.config.params).to.eql({depth: 'minimal'});
       done();
@@ -73,7 +73,7 @@ describe('Contact Field Tests', () => {
     };
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.contacts.fields.create(data, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.fields.create(data, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/field');
       expect(xhr.config.method).to.eql('post');
       done();
@@ -87,7 +87,7 @@ describe('Contact Field Tests', () => {
     };
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.contacts.fields.update(1, data, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.fields.update(1, data, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/field/1');
       expect(xhr.config.method).to.eql('put');
       done();
@@ -98,7 +98,7 @@ describe('Contact Field Tests', () => {
   it('Contact Field Delete', done => {
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.contacts.fields.delete(1, assertSuccessful(done, function(err, result, xhr) {
+    eloqua.assets.contacts.fields.delete(1, assertSuccessful(done, function(err, result, xhr) {
       expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/contact/field/1');
       expect(xhr.config.method).to.eql('delete');
       done();

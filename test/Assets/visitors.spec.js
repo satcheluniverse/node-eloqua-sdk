@@ -24,25 +24,24 @@ describe('Visitor Tests', () => {
     return done();
   });
 
-  /** @test {Visitors#get} */
-  it('Visitor Get', done => {
+  /** @test {Visitors#fields} */
+  it('Visitor Fields', done => {
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.visitors.get(null, assertSuccessful(done, function(err, result, xhr) {
-      expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/data/visitors');
+    eloqua.assets.visitors.fields(null, assertSuccessful(done, function(err, result, xhr) {
+      expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/visitor/fields');
       done();
     }));
   });
 
-  /** @test {Visitors#get} */
-  it('Visitor Get with Querystring', done => {
+  /** @test {Visitors#fields} */
+  it('Visitor Fields with Querystring', done => {
     eloqua = new Eloqua(getOptions());
 
-    eloqua.data.visitors.get({count: 1}, assertSuccessful(done, function(err, result, xhr) {
-      expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/data/visitors');
+    eloqua.assets.visitors.fields({count: 1}, assertSuccessful(done, function(err, result, xhr) {
+      expect(xhr.config.url).to.eql('https://secure.p01.eloqua.com/API/REST/2.0/assets/visitor/fields');
       expect(xhr.config.params).to.eql({count: 1});
       done();
     }));
   });
-
 });
