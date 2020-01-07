@@ -75,7 +75,7 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.1",
     "debug": "^4.1.1",
     "deepmerge": "^3.0.0"
   },
