@@ -64,7 +64,7 @@
     "gulp-rename": "^1.4.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.1",
-    "jsdoc": "^3.5.5",
+    "jsdoc": "^3.6.4",
     "minami": "^1.2.3",
     "mocha": "^4.1.0",
     "must": "^0.13.4",
